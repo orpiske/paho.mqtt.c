@@ -13,6 +13,7 @@ BuildRequires:      cmake
 BuildRequires:      ninja-build
 BuildRequires:      gcc
 BuildRequires:      graphviz
+BuildRequires:      doxygen
 BuildRequires:      openssl-devel
 Requires:           openssl
 
