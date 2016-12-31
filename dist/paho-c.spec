@@ -10,7 +10,6 @@ Group:              Development/Tools
 Source:             paho-c-%{version}.tar.gz
 URL:                https://eclipse.org/paho/clients/c/
 BuildRequires:      cmake
-BuildRequires:      ninja-build
 BuildRequires:      gcc
 BuildRequires:      graphviz
 BuildRequires:      doxygen
@@ -42,12 +41,12 @@ Development documentation files for the the Paho MQTT C Client.
 
 %build
 mkdir build.paho && cd build.paho
-cmake -GNinja -DPAHO_WITH_SSL=TRUE -DPAHO_BUILD_DOCUMENTATION=TRUE -DPAHO_BUILD_SAMPLES=TRUE -DCMAKE_INSTALL_PREFIX=%{buildroot}/usr ..
-ninja-build
+cmake -DPAHO_WITH_SSL=TRUE -DPAHO_BUILD_DOCUMENTATION=TRUE -DPAHO_BUILD_SAMPLES=TRUE -DCMAKE_INSTALL_PREFIX=%{buildroot}/usr ..
+make
 
 %install
 cd build.paho
-ninja-build install
+make install
 
 %files
 %doc edl-v10 epl-v10
