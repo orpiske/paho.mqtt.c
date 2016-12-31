@@ -1,15 +1,15 @@
 #*******************************************************************************
 #  Copyright (c) 2015 logi.cals GmbH
-# 
+#
 #  All rights reserved. This program and the accompanying materials
 #  are made available under the terms of the Eclipse Public License v1.0
-#  and Eclipse Distribution License v1.0 which accompany this distribution. 
-# 
-#  The Eclipse Public License is available at 
+#  and Eclipse Distribution License v1.0 which accompany this distribution.
+#
+#  The Eclipse Public License is available at
 #     http://www.eclipse.org/legal/epl-v10.html
-#  and the Eclipse Distribution License is available at 
+#  and the Eclipse Distribution License is available at
 #    http://www.eclipse.org/org/documents/edl-v10.php.
-# 
+#
 #  Contributors:
 #     Rainer Poisel - initial version
 #*******************************************************************************/
@@ -53,10 +53,12 @@ ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
     SET(LIBS_SYSTEM dl)
 ENDIF()
 
+
+
 ADD_EXECUTABLE(MQTTVersion MQTTVersion.c)
 ADD_LIBRARY(paho-mqtt3c SHARED ${common_src} MQTTClient.c)
 ADD_LIBRARY(paho-mqtt3a SHARED ${common_src} MQTTAsync.c)
-TARGET_LINK_LIBRARIES(paho-mqtt3c pthread ${LIBS_SYSTEM}) 
+TARGET_LINK_LIBRARIES(paho-mqtt3c pthread ${LIBS_SYSTEM})
 TARGET_LINK_LIBRARIES(paho-mqtt3a pthread ${LIBS_SYSTEM})
 TARGET_LINK_LIBRARIES(MQTTVersion paho-mqtt3a paho-mqtt3c ${LIBS_SYSTEM})
 SET_TARGET_PROPERTIES(
@@ -65,7 +67,7 @@ SET_TARGET_PROPERTIES(
     SOVERSION ${PAHO_VERSION_MAJOR})
 INSTALL(TARGETS paho-mqtt3c paho-mqtt3a MQTTVersion
     RUNTIME DESTINATION bin
-    LIBRARY DESTINATION lib)
+    LIBRARY DESTINATION ${PAHO_LIBRARY_DIR_NAME})
 INSTALL(FILES MQTTAsync.h MQTTClient.h MQTTClientPersistence.h
     DESTINATION include)
 
@@ -89,9 +91,8 @@ IF (PAHO_WITH_SSL)
         SOVERSION ${PAHO_VERSION_MAJOR})
     INSTALL(TARGETS paho-mqtt3cs
         RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib)
+        LIBRARY DESTINATION ${PAHO_LIBRARY_DIR_NAME})
     INSTALL(TARGETS paho-mqtt3as
         RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib)
+        LIBRARY DESTINATION ${PAHO_LIBRARY_DIR_NAME})
 ENDIF()
-
