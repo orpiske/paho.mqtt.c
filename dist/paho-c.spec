@@ -30,7 +30,7 @@ Development files and samples for the the Paho MQTT C Client.
 
 
 %package devel-docs
-Summary:            MQTT C Client development kit
+Summary:            MQTT C Client development kit documentation
 Group:              Development/Libraries
 
 %description devel-docs
