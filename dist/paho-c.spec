@@ -60,5 +60,5 @@ make install
 %{_datadir}/*
 
 %changelog
-* Sat Dec 31 2016 Otavio R. Piske <angusyoung@gmail.com> - 20161231
+* Sat Dec 31 2016 Otavio R. Piske <opiske@redhat.com> - 20161231
 - Initial packaging
