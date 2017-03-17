@@ -789,6 +789,10 @@ int test4_run(int qos)
 				MQTTClient_free(topicName);
   	    		dup = 1;
 			}
+			else if (m && !m->dup) 
+			{
+				MyLog(LOGA_DEBUG, "Non-duplicate message id %d", m->msgid);
+			}
 		} while (dup == 1);
 		assert("should get a message", m != NULL, "m was %p", m);
 		if (m)
