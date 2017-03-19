@@ -29,7 +29,6 @@ CONFIGURE_FILE(VersionInfo.h.in
     )
 
 IF (PAHO_WITH_SSL)
-    SET(OPENSSL_LIB_SEARCH_PATH "" CACHE PATH "Directory containing OpenSSL libraries")
     SET(OPENSSL_INC_SEARCH_PATH "" CACHE PATH "Directory containing OpenSSL includes")
 
     IF (${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
