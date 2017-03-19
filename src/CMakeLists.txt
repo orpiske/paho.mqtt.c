@@ -29,20 +29,21 @@ CONFIGURE_FILE(VersionInfo.h.in
     )
 
 IF (PAHO_WITH_SSL)
-    SET(OPENSSL_DIR "" CACHE PATH "Directory containing OpenSSL includes")
-
+    SET(DEFAULT_OPENSSL_DIR "")
     IF (${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-      SET(OPENSSL_BREW_PATH "/usr/local/opt/openssl")
+      SET(DEFAULT_OPENSSL_DIR "/usr/local/opt/openssl")
     ENDIF (${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
 
-    FIND_PATH(OPENSSL_INCLUDE_DIR openssl/ssl.h
-        HINTS ${OPENSSL_DIR}/include ${OPENSSL_BREW_PATH}/include/)
-    FIND_LIBRARY(OPENSSL_LIB NAMES ssl libssl
-        HINTS ${OPENSSL_BREW_PATH}/lib ${OPENSSL_DIR}/lib ${OPENSSL_DIR}/lib64)
-    FIND_LIBRARY(OPENSSLCRYPTO_LIB NAMES crypto libcrypto
-      	HINTS ${OPENSSL_BREW_PATH}/lib ${OPENSSL_DIR}/lib ${OPENSSL_DIR}/lib64)
+    SET(OPENSSL_DIR ${DEFAULT_OPENSSL_DIR} CACHE PATH "Directory containing OpenSSL includes")
 
-    MESSAGE(STATUS "OpenSSL hints: ${OPENSSL_DIR},${OPENSSL_BREW_PATH}")
+   FIND_PATH(OPENSSL_INCLUDE_DIR openssl/ssl.h
+        HINTS ${OPENSSL_DIR}/include)
+    FIND_LIBRARY(OPENSSL_LIB NAMES ssl libssl
+        HINTS ${OPENSSL_DIR}/lib ${OPENSSL_DIR}/lib64)
+    FIND_LIBRARY(OPENSSLCRYPTO_LIB NAMES crypto libcrypto
+      	HINTS ${OPENSSL_DIR}/lib ${OPENSSL_DIR}/lib64)
+
+    MESSAGE(STATUS "OpenSSL hints: ${OPENSSL_DIR}")
     MESSAGE(STATUS "OpenSSL headers found at ${OPENSSL_INCLUDE_DIR}")
     MESSAGE(STATUS "OpenSSL library found at ${OPENSSL_LIB}")
     MESSAGE(STATUS "OpenSSL Crypto library found at ${OPENSSLCRYPTO_LIB}")
