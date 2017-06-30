@@ -3,8 +3,8 @@
 
 Summary:            MQTT C Client
 Name:               paho-c
-Version:            1.1.0
-Release:            1%{?dist}
+Version:            %{_user_defined_version}
+Release:            %{_user_defined_build}%{?dist}
 License:            Eclipse Distribution License 1.0 and Eclipse Public License 1.0
 Group:              Development/Tools
 Source:             paho-c-%{version}.tar.gz
