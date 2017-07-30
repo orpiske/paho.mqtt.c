@@ -1,7 +1,7 @@
 Summary:            MQTT C Client
 Name:               paho-c
 Version:            1.2.0
-Release:            4%{?dist}
+Release:            5%{?dist}
 License:            Eclipse Distribution License 1.0 and Eclipse Public License 1.0
 Source:             https://github.com/eclipse/paho.mqtt.c/archive/v%{version}.tar.gz
 URL:                https://eclipse.org/paho/clients/c/
@@ -25,11 +25,11 @@ Requires:           %{name}%{?_isa} = %{version}-%{release}
 Development files and samples for the the Paho MQTT C Client.
 
 
-%package devel-docs
+%package devel-doc
 Summary:            MQTT C Client development kit documentation
 BuildArch:          noarch
 
-%description devel-docs
+%description devel-doc
 Development documentation files for the the Paho MQTT C Client.
 
 %prep
@@ -52,10 +52,13 @@ make install DESTDIR=%{buildroot}
 %{_bindir}/*
 %{_includedir}/*
 
-%files devel-docs
+%files devel-doc
 %{_datadir}/*
 
 %changelog
+* Sun Jul 30 2017 Otavio R. Piske <opiske@redhat.com> - 1.2.0-5
+- Renamed the documentation package to -doc
+
 * Sun Jul 30 2017 Otavio R. Piske <opiske@redhat.com> - 1.2.0-4
 - Removed Group tag as required by packaging guidelines
 - Prevent the devel package from being used with incompatible versions
