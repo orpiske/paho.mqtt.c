@@ -1,9 +1,8 @@
 Summary:            MQTT C Client
 Name:               paho-c
 Version:            1.2.0
-Release:            3%{?dist}
+Release:            4%{?dist}
 License:            Eclipse Distribution License 1.0 and Eclipse Public License 1.0
-Group:              Development/Tools
 Source:             https://github.com/eclipse/paho.mqtt.c/archive/v%{version}.tar.gz
 URL:                https://eclipse.org/paho/clients/c/
 BuildRequires:      cmake
@@ -20,8 +19,7 @@ The Paho MQTT C Client is a fully fledged MQTT client written in ANSI standard C
 
 %package devel
 Summary:            MQTT C Client development kit
-Group:              Development/Libraries
-Requires:           paho-c
+Requires:           %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 Development files and samples for the the Paho MQTT C Client.
@@ -29,7 +27,7 @@ Development files and samples for the the Paho MQTT C Client.
 
 %package devel-docs
 Summary:            MQTT C Client development kit documentation
-Group:              Development/Libraries
+BuildArch:          noarch
 
 %description devel-docs
 Development documentation files for the the Paho MQTT C Client.
@@ -47,7 +45,7 @@ cd build.paho
 make install DESTDIR=%{buildroot}
 
 %files
-%doc edl-v10 epl-v10
+%license edl-v10 epl-v10
 %{_libdir}/*
 
 %files devel
@@ -58,6 +56,11 @@ make install DESTDIR=%{buildroot}
 %{_datadir}/*
 
 %changelog
+* Sun Jul 30 2017 Otavio R. Piske <opiske@redhat.com> - 1.2.0-4
+- Removed Group tag as required by packaging guidelines
+- Prevent the devel package from being used with incompatible versions
+- Replaced the doc tag with the license tag
+
 * Thu Jul 27 2017 Otavio R. Piske <opiske@redhat.com> - 1.2.0-4
 - Enabled generation of debuginfo package
 
