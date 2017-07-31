@@ -1,8 +1,8 @@
 Summary:            MQTT C Client
 Name:               paho-c
 Version:            1.2.0
-Release:            5%{?dist}
-License:            Eclipse Distribution License 1.0 and Eclipse Public License 1.0
+Release:            6%{?dist}
+License:            BSD and EPL
 Source:             https://github.com/eclipse/paho.mqtt.c/archive/v%{version}.tar.gz
 URL:                https://eclipse.org/paho/clients/c/
 BuildRequires:      cmake
@@ -56,6 +56,9 @@ make install DESTDIR=%{buildroot}
 %{_datadir}/*
 
 %changelog
+* Mon Jul 31 2017 Otavio R. Piske <opiske@redhat.com> - 1.2.0-6
+- Fixed short description of the project license
+
 * Sun Jul 30 2017 Otavio R. Piske <opiske@redhat.com> - 1.2.0-5
 - Renamed the documentation package to -doc
 
