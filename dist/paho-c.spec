@@ -1,7 +1,7 @@
 Summary:            MQTT C Client
 Name:               paho-c
 Version:            1.2.0
-Release:            7%{?dist}
+Release:            8%{?dist}
 License:            BSD and EPL
 Source:             https://github.com/eclipse/paho.mqtt.c/archive/v%{version}.tar.gz
 URL:                https://eclipse.org/paho/clients/c/
@@ -49,6 +49,8 @@ cd build.paho
 
 %post -p /sbin/ldconfig
 
+%postun -p /sbin/ldconfig
+
 %files devel
 %{_bindir}/*
 %{_includedir}/*
@@ -56,11 +58,16 @@ cd build.paho
 
 %post devel -p /sbin/ldconfig
 
+%postun devel -p /sbin/ldconfig
+
 %files devel-doc
 %license edl-v10 epl-v10
 %{_datadir}/*
 
 %changelog
+* Sat Aug 12 2017 Otavio R. Piske <opiske@redhat.com> - 1.2.0-8
+- Added missing ldconfig on the postun section
+
 * Sat Aug 12 2017 Otavio R. Piske <opiske@redhat.com> - 1.2.0-7
 - Replaced build and install commands with respective macros
 - Added license to the devel docs packages
