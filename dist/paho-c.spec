@@ -1,7 +1,7 @@
 Summary:            MQTT C Client
 Name:               paho-c
 Version:            1.2.0
-Release:            6%{?dist}
+Release:            7%{?dist}
 License:            BSD and EPL
 Source:             https://github.com/eclipse/paho.mqtt.c/archive/v%{version}.tar.gz
 URL:                https://eclipse.org/paho/clients/c/
@@ -10,7 +10,6 @@ BuildRequires:      gcc
 BuildRequires:      graphviz
 BuildRequires:      doxygen
 BuildRequires:      openssl-devel
-Requires:           openssl
 
 
 %description
@@ -38,24 +37,36 @@ Development documentation files for the the Paho MQTT C Client.
 %build
 mkdir build.paho && cd build.paho
 %cmake -DPAHO_WITH_SSL=TRUE -DPAHO_BUILD_DOCUMENTATION=TRUE -DPAHO_BUILD_SAMPLES=TRUE ..
-make %{?_smp_mflags}
+%make_build
 
 %install
 cd build.paho
-make install DESTDIR=%{buildroot}
+%make_install
 
 %files
 %license edl-v10 epl-v10
-%{_libdir}/*
+%{_libdir}/*.so.*
+
+%post -p /sbin/ldconfig
 
 %files devel
 %{_bindir}/*
 %{_includedir}/*
+%{_libdir}/*.so
+
+%post devel -p /sbin/ldconfig
 
 %files devel-doc
+%license edl-v10 epl-v10
 %{_datadir}/*
 
 %changelog
+* Sat Aug 12 2017 Otavio R. Piske <opiske@redhat.com> - 1.2.0-7
+- Replaced build and install commands with respective macros
+- Added license to the devel docs packages
+- Removed explicit require on OpenSSL
+- Move the shared library symlinks to the devel package
+
 * Mon Jul 31 2017 Otavio R. Piske <opiske@redhat.com> - 1.2.0-6
 - Fixed short description of the project license
 
