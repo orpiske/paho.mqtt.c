@@ -32,7 +32,7 @@ BuildArch:          noarch
 Development documentation files for the the Paho MQTT C Client.
 
 %prep
-%autosetup -n paho-c-%{version}
+%autosetup -n paho.mqtt.c-%{version}
 
 %build
 mkdir build.paho && cd build.paho
